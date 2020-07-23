@@ -71,6 +71,7 @@ services:
       - '{"name":"bsc-mock-ws","type":"binance-smart-chain","url":"ws://mock:8080/ws/binance-smart-chain"}'
       - '{"name":"near-mock-http","type":"near","url":"http://mock:8080/rpc/near","refreshInterval":600}'
       - '{"name":"iotx-mock-grpc","type":"iotex","url":"http://mock:8090","refreshInterval":600}'
+      - '{"name":"eth-qae-mock","type":"eth-query-and-execute","url":"http://mock:8080/rpc/eth-query-and-execute","refreshInterval":600}'
     networks:
       - integration
 volumes:
