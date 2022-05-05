@@ -253,17 +253,21 @@ func (srv *Service) subscribe(sub *store.Subscription, iSubscriber subscriber.IS
 		time.Sleep(1 * time.Second)
 
 		for {
-			event, ok := <-as.Events
-			if !ok {
-				return
-			}
-			go func() {
-				err := as.Node.TriggerJob(as.Subscription.Job, event)
-				if err != nil {
-					logger.Error("Failed sending job run trigger: ", err)
-				}
-			}()
-		}
+                        event, ok := <-as.Events
+                        if !ok {
+                                return
+                        }
+                        go func() {
+                                for {
+                                        err := as.Node.TriggerJob(as.Subscription.Job, event)
+                                        if err != nil {
+                                                logger.Error("Failed sending job run trigger: ", err)
+                                        }else {
+                                                break
+                                        }
+                                }
+                        }()
+                }
 	}()
 
 	return nil
